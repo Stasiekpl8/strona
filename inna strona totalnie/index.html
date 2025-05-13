@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Jamniki – Dzień, Tydzień, Miesiąc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffaf2;
+      color: #3a2d2d;
+    }
+
+    header {
+      background-color: #a0522d;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #deb887;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #cd853f;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 30px 5%;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .dog-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      max-width: 800px;
+      display: flex;
+      overflow: hidden;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .dog-card:hover {
+      transform: scale(1.02);
+    }
+
+    .dog-card img {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .dog-info {
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .dog-info h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .dog-info p {
+      font-size: 16px;
+    }
+
+    footer {
+      background-color: #4b2e2e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MODAL STYLING */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .modal h2 {
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🐶 Top 5 Jamników</h1>
+    <p>Codzienna, tygodniowa i miesięczna dawka uroczych jamników!</p>
+    <nav>
+      <button onclick="showTab('daily')">Dzień</button>
+      <button onclick="showTab('week')">Tydzień</button>
+      <button onclick="showTab('month')">Miesiąc</button>
+    </nav>
+  </header>
+
+  <!-- Dzienna zakładka -->
+  <div class="tab-content active" id="daily">
+    <center><h2>🥇 Jamniki dnia</h2></center>
+
+    <div class="dog-card" onclick="showModal('Figa', 'Kocha dawać buziaki i kraść skarpetki. Skończyła ostatnio 5 miesięcy🥰🥰', 'figa.png')">
+      <img src="figa.png" alt="Jamnik">
+      <div class="dog-info">
+        <h2>🥇 Figa</h2>
+        <p>Kocha dawać buziaki i kraść skarpetki. Skończyła ostatnio 5 miesięcy🥰🥰</p>
+      </div>
+    </div>
+
+    <div class="dog-card" onclick="showModal('Ludwik', 'Po prostu Ludwik.', 'ludwik.jpg')">
+      <img src="ludwik.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>🥈 Ludwik</h2>
+        <p>Po prostu Ludwik.</p>
+      </div>
+    </div>
+
+    <div class="dog-card" onclick="showModal('Frejka', 'Słodzinka🥰', 'frejka.jpg')">
+      <img src="frejka.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>🥉 Frejka</h2>
+        <p>Słodzinka🥰</p>
+      </div>
+    </div>
+
+    <div class="dog-card" onclick="showModal('Niewiadomo ale słodziak', 'Życzy dobrej nocy na Kochamy Jamniki😍', 'slidzknak.jpg')">
+      <img src="slidzknak.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>Top 4 – Niewiadomo ale słodziak</h2>
+        <p>Życzy dobrej nocy na Kochamy Jamniki😍</p>
+      </div>
+    </div>
+
+    <div class="dog-card" onclick="showModal('Dozorca Ogrodu', 'Dozorca ogrodu na posterunku🤣', 'dozorca ogordu.jpg')">
+      <img src="dozorca ogordu.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>Top 5 – Dozorca Ogrodu</h2>
+        <p>Dozorca ogrodu na posterunku🤣</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tygodniowa zakładka -->
+  <div class="tab-content" id="week">
+    <center><h2>📅 Jamniki tygodnia</h2></center>
+    <div class="dog-card" onclick="showModal('Fajny', 'Fajny bo emilka wysłala 🤗 wiem jak coś', 'slod.jpg')">
+      <img src="slod.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>🥇 Fajny</h2>
+        <p>Fajny bo emilka wysłala 🤗 wiem jak coś</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Miesięczna zakładka -->
+  <div class="tab-content" id="month">
+  <center><h2>📆 Jamniki miesiąca</h2></center>
+    <div class="dog-card" onclick="showModal('Florka', 'To jest Florka i skończyła 3,5 miesiąca😍🥰', 'florka.jpg')">
+      <img src="florka.jpg" alt="Jamnik">
+      <div class="dog-info">
+        <h2>🥇 Florka</h2>
+        <p>To jest Florka i skończyła 3,5 miesiąca😍🥰</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal(event)">&times;</span>
+      <img id="modal-img" src="" alt="">
+      <h2 id="modal-name"></h2>
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+
+  <footer>
+    🐾 Strona stworzona z miłości do jamników i Emilki 🐾
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function showModal(name, desc, imgSrc) {
+      document.getElementById('modal-name').textContent = name;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-img').src = imgSrc;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal(event) {
+      if (
+        event.target.classList.contains('modal') ||
+        event.target.classList.contains('close-btn')
+      ) {
+        document.getElementById('modal').style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
